@@ -58,27 +58,33 @@ const socials = [
     {
         id: 2,
         title: "LinkedIn",
-        url: "https://www.linkedin.com/in//",
+        url: "https://www.linkedin.com/in/kalpesh11111",
         tab: 3,
     },
     {
         id: 3,
-        title: "X/Twitter",
-        url: "https://x.com/",
-        tab: 1,
-    },
-    {
-        id: 4,
         title: "Blog",
-        url: "https://blog.",
+        url: "https://blog.kalpeshsolanki.me",
         tab: 0,
     },
-    {
-        id: 5,
-        title: "LinkTree",
-        url: "https://linktr.ee/",
-        tab: 0,
-    },
+    // {
+    //     id: 3,
+    //     title: "X/Twitter",
+    //     url: "https://x.com/",
+    //     tab: 1,
+    // },
+    // {
+    //     id: 4,
+    //     title: "Blog",
+    //     url: "https://blog.",
+    //     tab: 0,
+    // },
+    // {
+    //     id: 5,
+    //     title: "LinkTree",
+    //     url: "https://linktr.ee/",
+    //     tab: 0,
+    // },
 ];
 
 export default Socials;
