@@ -1,38 +1,54 @@
+// src/components/About.tsx (or wherever your About component is)
+import React, { useState, useEffect } from 'react';
+import TypingEffect from '../TypingEffect'; // Adjust path as needed
 import {
-  AboutWrapper,
-  HighlightAlt,
-  HighlightSpan,
+    AboutWrapper,
+    HighlightAlt,
+    HighlightSpan,
 } from "../styles/About.styled";
-import Type from "../Type";
-import Sequence from "../Sequence";
 
 const Whois: React.FC = () => {
-  return (
-    <AboutWrapper data-testid="Whois">
-      <Sequence speed={25} gap={350}>
-      <p>
-          <Type>Hi, my name is </Type>
-          <HighlightSpan>KALPESH SOLANKI</HighlightSpan>
-          <Type>! You can also call me Xploitoverload.</Type>
-      </p>
+    const [showFirstParagraph, setShowFirstParagraph] = useState(false);
+    const [showSecondParagraph, setShowSecondParagraph] = useState(false);
+    const [showThirdParagraph, setShowThirdParagraph] = useState(false);
 
-        <p>
-          <Type>I'm </Type>
-          <HighlightAlt>a security researcher</HighlightAlt>
-          <Type> and </Type>
-          <HighlightAlt>hacker</HighlightAlt>
-          <Type>.</Type>
-        </p>
-        <p>
-          <Type>I love to build and hack stuff.</Type>
-         
-          <Type>To see my projects please type "projects".</Type>
-          <Type>
-            To learn more about me with a GUI portfolio, please type "gui".
-          </Type></p>
-      </Sequence>
-    </AboutWrapper>
-  );
+    useEffect(() => {
+        // Start showing the first paragraph after a short delay or immediately
+        setShowFirstParagraph(true);
+    }, []); // Run once on mount
+
+    return (
+        <AboutWrapper data-testid="whois">
+            <p>
+                {showFirstParagraph && (
+                    <TypingEffect
+                        text="Hi, my name is KALPESH SOLANKI! You can also call me Xploitoverload."
+                        typingSpeed={40} // Adjust speed as desired
+                        onTypingComplete={() => setShowSecondParagraph(true)}
+                    />
+                )}
+            </p>
+            <p>
+                {showSecondParagraph && (
+                    <TypingEffect
+                        text="I'm a security researcher and hacker."
+                        typingSpeed={40}
+                        delay={500} // Short delay after first paragraph finishes
+                        onTypingComplete={() => setShowThirdParagraph(true)}
+                    />
+                )}
+            </p>
+            <p>
+                {showThirdParagraph && (
+                    <TypingEffect
+                        text="I love to build and hack stuff. To see my projects please type projects. To learn more about me with a GUI portfolio, please type gui."
+                        typingSpeed={40}
+                        delay={500} // Short delay after second paragraph finishes
+                    />
+                )}
+            </p>
+        </AboutWrapper>
+    );
 };
 
 export default Whois;
