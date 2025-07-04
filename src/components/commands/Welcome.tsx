@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TypingEffect from './TypingEffect';
+import TypingEffect from '../TypingEffect';
 import {
     Cmd,
     HeroContainer,
