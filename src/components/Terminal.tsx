@@ -28,10 +28,10 @@ type Command = {
 
 export const commands: Command = [
     { cmd: "whois", desc: "whois xploitoverload", tab: 8 },
-    { cmd: "secret", desc: "Find the Password", tab: 8},
+    { cmd: "secret", desc: "find the Password", tab: 7 },
     { cmd: "clear", desc: "clear the terminal", tab: 8 },
     { cmd: "echo", desc: "print out anything", tab: 9 },
-    { cmd: "sudo", desc: "Only use if you're admin", tab: 8},
+    { cmd: "sudo", desc: "Only use if you're admin", tab: 9 },
     { cmd: "education", desc: "my education background", tab: 4 },
     { cmd: "email", desc: "send an email to me", tab: 8 },
     { cmd: "gui", desc: "go to my portfolio in GUI", tab: 10 },
