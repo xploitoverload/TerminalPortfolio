@@ -1,47 +1,59 @@
+// src/components/commands/Whois.tsx
 import React, { useState, useEffect } from 'react';
-import TypingEffect from '../TypingEffect'; // <--- IMPORTANT: Adjust this path based on your file structure
-                                         // If TypingEffect.tsx is in the same folder as Whois.tsx, use './TypingEffect'
-                                         // If TypingEffect.tsx is one level up, use '../TypingEffect'
+import TypingEffect from '../TypingEffect';
 import {
     AboutWrapper,
     HighlightAlt,
     HighlightSpan,
-} from "../styles/About.styled"; // <--- IMPORTANT: Adjust this path if needed
+} from "../styles/About.styled";
 
 const Whois: React.FC = () => {
-    // State to control visibility and completion of each paragraph's typing effect
     const [showFirstParagraph, setShowFirstParagraph] = useState(false);
     const [firstParagraphTyped, setFirstParagraphTyped] = useState(false);
 
-    const [showSecondParagraph, setShowSecondParagraph] = useState(false);
+    const [showSecondParagraph, setShowSecondParagraph = useState(false);
     const [secondParagraphTyped, setSecondParagraphTyped] = useState(false);
 
     const [showThirdParagraph, setShowThirdParagraph] = useState(false);
     const [thirdParagraphTyped, setThirdParagraphTyped] = useState(false);
 
-    // Effect to kick off the first paragraph's typing when the component mounts
     useEffect(() => {
-        // console.log("Whois component mounted, setting showFirstParagraph to true."); // DEBUG: Optional log
+        console.log("Whois: Component mounted. Setting showFirstParagraph to true."); // <--- LOG
         setShowFirstParagraph(true);
-    }, []); // Runs only once on component mount
+    }, []);
+
+    // Add useEffects to track state changes
+    useEffect(() => {
+        console.log("Whois State: firstParagraphTyped =", firstParagraphTyped, "showSecondParagraph =", showSecondParagraph); // <--- LOG
+    }, [firstParagraphTyped, showSecondParagraph]);
+
+    useEffect(() => {
+        console.log("Whois State: secondParagraphTyped =", secondParagraphTyped, "showThirdParagraph =", showThirdParagraph); // <--- LOG
+    }, [secondParagraphTyped, showThirdParagraph]);
+
+    useEffect(() => {
+        console.log("Whois State: thirdParagraphTyped =", thirdParagraphTyped); // <--- LOG
+    }, [thirdParagraphTyped]);
+
 
     return (
         <AboutWrapper data-testid="whois">
             {/* First Paragraph */}
             <p>
-                {!firstParagraphTyped ? ( // If not yet typed, show the typing effect
+                {!firstParagraphTyped ? (
                     showFirstParagraph && (
                         <TypingEffect
                             text="Hi, my name is KALPESH SOLANKI! You can also call me Xploitoverload."
-                            typingSpeed={1} // Maximum speed for rapid reveal
+                            typingSpeed={1}
                             onTypingComplete={() => {
-                                // console.log("First paragraph typing complete. Setting firstParagraphTyped to true and showSecondParagraph to true."); // DEBUG: Optional log
-                                setFirstParagraphTyped(true); // Mark as typed
-                                setShowSecondParagraph(true); // Trigger next paragraph
+                                console.log("Whois Callback: First paragraph typing complete. Attempting to update state."); // <--- LOG
+                                setFirstParagraphTyped(true);
+                                setShowSecondParagraph(true);
+                                console.log("Whois Callback: State update calls made for first paragraph."); // <--- LOG
                             }}
                         />
                     )
-                ) : ( // Once typed, display the fully formatted JSX
+                ) : (
                     <>
                         Hi, my name is <HighlightSpan>KALPESH SOLANKI</HighlightSpan>! You can
                         also call me Xploitoverload.
@@ -51,20 +63,21 @@ const Whois: React.FC = () => {
 
             {/* Second Paragraph */}
             <p>
-                {!secondParagraphTyped ? ( // If not yet typed, show the typing effect
-                    showSecondParagraph && (
+                {!secondParagraphTyped ? (
+                    showSecondParagraph && ( // This must be true for TypingEffect to render
                         <TypingEffect
                             text="I'm a security researcher and hacker."
-                            typingSpeed={1} // Maximum speed
-                            delay={200} // Short pause before starting the next paragraph
+                            typingSpeed={1}
+                            delay={200}
                             onTypingComplete={() => {
-                                // console.log("Second paragraph typing complete. Setting secondParagraphTyped to true and showThirdParagraph to true."); // DEBUG: Optional log
-                                setSecondParagraphTyped(true); // Mark as typed
-                                setShowThirdParagraph(true); // Trigger next paragraph
+                                console.log("Whois Callback: Second paragraph typing complete. Attempting to update state."); // <--- LOG
+                                setSecondParagraphTyped(true);
+                                setShowThirdParagraph(true);
+                                console.log("Whois Callback: State update calls made for second paragraph."); // <--- LOG
                             }}
                         />
                     )
-                ) : ( // Once typed, display the fully formatted JSX
+                ) : (
                     <>
                         I'm <HighlightAlt>a security researcher</HighlightAlt> and{" "}
                         <HighlightAlt>hacker</HighlightAlt>.
@@ -72,24 +85,22 @@ const Whois: React.FC = () => {
                 )}
             </p>
 
-            {/* Third Paragraph - This one includes newlines */}
+            {/* Third Paragraph */}
             <p>
-                {!thirdParagraphTyped ? ( // If not yet typed, show the typing effect
-                    showThirdParagraph && (
+                {!thirdParagraphTyped ? (
+                    showThirdParagraph && ( // This must be true for TypingEffect to render
                         <TypingEffect
-                            // Text for typing effect (plain string).
-                            // The \n will be printed literally by TypingEffect.
-                            // The actual line breaks will appear when JSX replaces it.
                             text={"I love to build and hack stuff.\nTo see my projects please type \"projects\".\nTo learn more about me with a GUI portfolio, please type \"gui\"."}
-                            typingSpeed={1} // Maximum speed
-                            delay={200} // Short pause before starting
+                            typingSpeed={1}
+                            delay={200}
                             onTypingComplete={() => {
-                                // console.log("Third paragraph typing complete. Setting thirdParagraphTyped to true."); // DEBUG: Optional log
-                                setThirdParagraphTyped(true); // Mark as typed
+                                console.log("Whois Callback: Third paragraph typing complete. Attempting to update state."); // <--- LOG
+                                setThirdParagraphTyped(true);
+                                console.log("Whois Callback: State update calls made for third paragraph."); // <--- LOG
                             }}
                         />
                     )
-                ) : ( // Once typed, display the fully formatted JSX with <br />
+                ) : (
                     <>
                         I love to build and hack stuff. <br />
                         To see my projects please type "projects". <br />
