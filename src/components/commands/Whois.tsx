@@ -1,6 +1,6 @@
 // src/components/About.tsx (or wherever you placed it)
 import React, { useState, useEffect } from 'react';
-import TypingEffect from './TypingEffect'; // !! Verify this path is correct !!
+import TypingEffect from '../TypingEffect'; // !! Verify this path is correct !!
 import {
     AboutWrapper,
     HighlightAlt,
