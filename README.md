@@ -1,14 +1,23 @@
-# Terminal Portfolio Website by Sat Naing
+# Terminal Portfolio Website by Kalpesh Solanki
 
-![Terminal Portfolio Website by Sat Naing](/public/xploitoverload-og.png)
+<p align="center">
+  <img 
+    src="/public/xploitoverload-og.png" 
+    alt="Terminal Portfolio Website by Kalpesh Solanki"
+    width="600"
+    style="box-shadow: 0 4px 20px rgba(0,0,0,0); border-radius: 10px;"
+  />
+</p>
+
+
+
 
 ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue?style=flat-square)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/81fdb91d-c06f-46c2-b18d-dfc6f090f281/deploy-status)](https://app.netlify.com/sites/terminal-sn/deploys)
 ![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)
 
 My perfolio website in terminal version developed with React, TypeScript and Styled-Components. Multiple themes supported and keyboard shortcuts can be used for some functionalities.
 
-Blog Post: https://satnaing.dev/blog/posts/how-do-i-develop-my-terminal-portfolio-website-with-react
+Blog Post: https://blog.kalpeshsolanki.me
 
 ## Demo
 
@@ -43,7 +52,7 @@ Blog Post: https://satnaing.dev/blog/posts/how-do-i-develop-my-terminal-portfoli
 <a href="https://www.jinno.app/redirect?from=satnaing&redirect=libary&libName=terminal-portfolio&componentName=AppUbuntu&libCreator=satnaing" target="_blank" rel="noopener noreferrer">Demo - ubuntu theme</a><br/>
 
 Currently, this website supports 6 themes. Type `themes` in the terminal for more info.
-![terminal-portfolio-themes](https://user-images.githubusercontent.com/53733092/194221801-94f1c28b-4865-4b7f-a73e-d41132519bea.png)
+![terminal-portfolio-themes]()
 
 ## Lighthouse Score
 
@@ -56,7 +65,7 @@ Currently, this website supports 6 themes. Type `themes` in the terminal for mor
 Clone the project
 
 ```bash
-git clone https://github.com/satnaing/terminal-portfolio.git
+git clone https://github.com/xploitoverload/terminal-portfolio.git
 ```
 
 Go to the project directory
