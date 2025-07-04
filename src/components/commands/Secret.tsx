@@ -19,11 +19,11 @@ const Secret: React.FC = () => {
     setLocked?.(true);
     console.log(
       "%cYou hacked my password!😠",
-      "color:red;font-size:16px;font-weight:bold;"
+      "color:red;font-size:24px;font-weight:bold;"
     );
     console.log(
       "%cPassword: 'xploitoverload' - I wonder what it does?🤔",
-      "color:gray;font-size:10px;"
+      "color:gray;font-size:12px;"
     );
     inputRef.current?.focus();
     return () => setLocked?.(false);
