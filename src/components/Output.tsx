@@ -17,7 +17,7 @@ import { OutputContainer, UsageDiv } from "./styles/Output.styled";
 import { termContext } from "./Terminal";
 import { useContext } from "react";
 import Flag from "./commands/Flag";
-import AutoType from "../AutoType";
+import AutoType from "./AutoType";
 
 type Props = {
     index: number;
