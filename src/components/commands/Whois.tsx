@@ -11,7 +11,7 @@ const Whois: React.FC = () => {
     const [showFirstParagraph, setShowFirstParagraph] = useState(false);
     const [firstParagraphTyped, setFirstParagraphTyped] = useState(false);
 
-    const [showSecondParagraph, setShowSecondParagraph = useState(false);
+    const [showSecondParagraph, setShowSecondParagraph] = useState(false);
     const [secondParagraphTyped, setSecondParagraphTyped] = useState(false);
 
     const [showThirdParagraph, setShowThirdParagraph] = useState(false);
