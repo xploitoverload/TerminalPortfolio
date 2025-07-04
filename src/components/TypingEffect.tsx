@@ -1,4 +1,4 @@
-// src/components/TypingEffect.tsx
+// src/components/TypingEffect.tsx (or wherever you placed it)
 import React, { useState, useEffect } from 'react';
 
 interface TypingEffectProps {
@@ -28,6 +28,7 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
         }, typingSpeed);
       } else {
         // Typing is complete
+        console.log(`Typing complete for: "${text.substring(0, 20)}..."`); // DEBUG: Log completion
         if (onTypingComplete) {
           onTypingComplete();
         }
@@ -48,7 +49,7 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
     };
   }, [text, currentIndex, typingSpeed, delay, onTypingComplete]);
 
-  return <>{displayText}</>; // Using a Fragment to avoid extra spans
+  return <>{displayText}</>;
 };
 
 export default TypingEffect;
