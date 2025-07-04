@@ -1,40 +1,68 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Wrapper } from "../styles/Output.styled";
 import { termContext } from "../Terminal";
 
-/* ===== config ===== */
-const CORRECT_PASSWORD = "xploitoverload";
+const CORRECT = "fkcodes";
 
 const Secret: React.FC = () => {
-  const { arg } = useContext(termContext);   // `arg` = ["secret", "...pwd?"]
+  const { setLocked } = useContext(termContext);
+  const [pwd, setPwd] = useState("");
+  const [stage, setStage] = useState<"ask" | "wrong" | "ok">("ask");
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  /* ===== console Easter‑egg ===== */
+  /* lock main prompt */
   useEffect(() => {
-    console.log(
-      "%cYou hacked my password!😠",
-      "color:red;font-size:20px;font-weight:bold;"
-    );
-    console.log(
-      "%cPassword: 'xploitoverload' - I wonder what it does?🤔",
-      "color:gray;font-size:10px;"
-    );
+    setLocked?.(true);
+    console.log("%cYou hacked my password!😠", "color:red;font-size:16px;font-weight:bold;");
+    console.log("%cPassword: 'fkcodes' - I wonder what it does?🤔", "color:gray;font-size:10px;");
+    inputRef.current?.focus();
+    return () => setLocked?.(false);
   }, []);
 
-  /* ===== terminal output ===== */
-  const passwordSupplied = arg.length > 1 ? arg[1] : "";
-  const isCorrect = passwordSupplied === CORRECT_PASSWORD;
+  const submit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (pwd.trim().toLowerCase() === CORRECT) {
+      setStage("ok");
+      setTimeout(() => setLocked?.(false), 40);
+    } else {
+      setStage("wrong");
+      setPwd("");
+      inputRef.current?.focus();
+    }
+  };
+
+  if (stage === "ok") {
+    return (
+      <Wrapper>
+        <span style={{ display: "inline-block", width: "8ch", color: "#50fa7b" }}>
+          sudo
+        </span>
+        <span style={{ color: "#f1fa8c" }}>Only use if you're admin</span>
+      </Wrapper>
+    );
+  }
 
   return (
-    <Wrapper data-testid="secret">
-      {isCorrect ? (
-        /* Same look‑and‑feel as your help listing */
-        <>
-          <span style={{ display: "inline-block", width: "8ch" }}>sudo</span>
-          <span>Only use if you're admin</span>
-        </>
-      ) : (
-        <span>Enter password:</span>
-      )}
+    <Wrapper>
+      <form onSubmit={submit} style={{ display: "inline" }}>
+        <span>
+          {stage === "wrong" ? "Wrong password – try again:" : "Enter password:"}
+        </span>
+        <input
+          ref={inputRef}
+          type="password"
+          value={pwd}
+          onChange={e => setPwd(e.target.value)}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "inherit",
+            marginLeft: "4px",
+            outline: "none",
+            width: "120px",
+          }}
+        />
+      </form>
     </Wrapper>
   );
 };
