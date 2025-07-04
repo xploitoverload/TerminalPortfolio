@@ -103,4 +103,5 @@ const theme: Themes = {
   },
 };
 
+export const defaultTheme = theme["green-goblin"];
 export default theme;
