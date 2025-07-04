@@ -16,7 +16,7 @@ const Whois: React.FC = () => {
           <Type>! You can also call me Xploitoverload.</Type>
         </div>
 
-        <div style={{ marginBottom: "4px" }}>
+        <div style={{ marginBottom: "5px" }}>
           <Type>I'm </Type>
           <HighlightAlt>a security researcher</HighlightAlt>
           <Type> and </Type>
