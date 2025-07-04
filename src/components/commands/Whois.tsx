@@ -1,27 +1,40 @@
 import {
-    AboutWrapper,
-    HighlightAlt,
-    HighlightSpan,
+  AboutWrapper,
+  HighlightAlt,
+  HighlightSpan,
 } from "../styles/About.styled";
+import Type from "../Type";
 
 const Whois: React.FC = () => {
-    return (
-        <AboutWrapper data-testid="Whois">
-            <p>
-                Hi, my name is <HighlightSpan>KALPESH SOLANKI</HighlightSpan>! You can
-                also call me Xploitoverload.
-            </p>
-            <p>
-                I'm <HighlightAlt>a security researcher</HighlightAlt> and{" "}
-                <HighlightAlt>hacker</HighlightAlt>.
-            </p>
-            <p>
-                I love to build and hack stuff. <br />
-                To see my projects please type "projects". <br />
-                To learn more about me with a GUI portfolio, please type "gui".
-            </p>
-        </AboutWrapper>
-    );
+  return (
+    <AboutWrapper data-testid="Whois">
+      <p>
+        <Type>
+          Hi, my name is{" "}
+        </Type>
+        <HighlightSpan>KALPESH SOLANKI</HighlightSpan>
+        <Type>
+          ! You can also call me Xploitoverload.
+        </Type>
+      </p>
+
+      <p>
+        <Type>I'm </Type>
+        <HighlightAlt>a security researcher</HighlightAlt>
+        <Type> and </Type>
+        <HighlightAlt>hacker</HighlightAlt>
+        <Type>.</Type>
+      </p>
+
+      <p>
+        <Type>I love to build and hack stuff.</Type>
+        <br />
+        <Type>To see my projects please type "projects".</Type>
+        <br />
+        <Type>To learn more about me with a GUI portfolio, please type "gui".</Type>
+      </p>
+    </AboutWrapper>
+  );
 };
 
 export default Whois;
