@@ -16,8 +16,8 @@ const Help: React.FC = () => {
   
   // Key bindings data
   const keyBindings = [
-    "Tab or Ctrl + i = autocompletes the command",
-    "Up Arrow = go back to previous command",
+    "Tab or Ctrl + i = autocompletes the command\n",
+    "Up Arrow = go back to previous command\n",
     "Ctrl + l = clear the terminal"
   ];
   const [visibleKeyBindings, setVisibleKeyBindings] = useState<number[]>([]);
