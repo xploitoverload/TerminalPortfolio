@@ -1,5 +1,5 @@
 // src/components/TypingEffect.tsx
-import React, { useState, useEffect, useRef } from 'react'; // Import useRef
+import React, { useState, useEffect } from 'react';
 
 interface TypingEffectProps {
   text: string;
@@ -15,65 +15,47 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   onTypingComplete,
 }) => {
   const [displayText, setDisplayText] = useState('');
-  // Use a ref to hold the current index. Updates to a ref's .current value
-  // do NOT trigger component re-renders or useEffect re-runs.
-  const currentIndexRef = useRef(0);
-  const timeoutIdRef = useRef<NodeJS.Timeout | null>(null); // To store and clear the timeout ID
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // 1. Cleanup any existing timeout when the effect re-runs or component unmounts
-    if (timeoutIdRef.current) {
-      clearTimeout(timeoutIdRef.current);
-      timeoutIdRef.current = null; // Clear the ref
-    }
+    let timeoutId: NodeJS.Timeout;
 
-    // 2. Reset state for a new typing sequence
-    setDisplayText('');
-    currentIndexRef.current = 0; // Reset the ref to 0 for the new text
-
-    // 3. Define the recursive typing function
-    const typeCharacter = () => {
-      if (currentIndexRef.current < text.length) {
-        // Append the next character
-        setDisplayText((prevText) => prevText + text[currentIndexRef.current]);
-        // Increment the ref's current value directly
-        currentIndexRef.current += 1;
-        // Schedule the next character
-        timeoutIdRef.current = setTimeout(typeCharacter, typingSpeed);
+    const startTyping = () => {
+      if (currentIndex < text.length) {
+        timeoutId = setTimeout(() => {
+          setDisplayText((prevText) => prevText + text[currentIndex]);
+          setCurrentIndex((prevIndex) => prevIndex + 1);
+        }, typingSpeed);
       } else {
         // Typing is complete
-        console.log(`TypingEffect: Finished typing for: "${text.substring(0, Math.min(30, text.length))}..."`);
+        console.log(`TypingEffect: Finished typing for: "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
         if (onTypingComplete) {
-          console.log(`TypingEffect: Calling onTypingComplete for "${text.substring(0, Math.min(30, text.length))}..."`);
-          onTypingComplete();
+            console.log(`TypingEffect: Calling onTypingComplete for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
+            onTypingComplete();
         } else {
-          console.log(`TypingEffect: onTypingComplete prop is undefined for "${text.substring(0, Math.min(30, text.length))}..."`);
+            console.log(`TypingEffect: onTypingComplete prop is undefined for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
         }
-        timeoutIdRef.current = null; // Clear timeout ID when typing is genuinely finished
       }
     };
 
-    // 4. Start the typing process with an initial delay if specified
-    if (delay > 0) {
-      console.log(`TypingEffect: Starting with initial delay ${delay} for "${text.substring(0, Math.min(30, text.length))}..."`);
-      timeoutIdRef.current = setTimeout(typeCharacter, delay);
+    if (currentIndex < text.length) {
+      if (delay > 0 && currentIndex === 0) {
+        console.log(`TypingEffect: Starting with delay ${delay} for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
+        timeoutId = setTimeout(startTyping, delay);
+      } else {
+        console.log(`TypingEffect: Starting immediately for "${text.substring(0, 30)}..." (Current index: ${currentIndex})`); // <--- ADD THIS LOG
+        startTyping();
+      }
     } else {
-      console.log(`TypingEffect: Starting immediately for "${text.substring(0, Math.min(30, text.length))}..."`);
-      typeCharacter(); // Start typing without delay
+        console.log(`TypingEffect: Already completed for "${text.substring(0, 30)}..." (Current index: ${currentIndex}, text length: ${text.length})`); // <--- ADD THIS LOG
     }
 
-    // 5. Cleanup function for the effect
-    return () => {
-      console.log(`TypingEffect: Cleanup for "${text.substring(0, Math.min(30, text.length))}..."`);
-      if (timeoutIdRef.current) {
-        clearTimeout(timeoutIdRef.current);
-      }
-    };
 
-    // Dependencies: The effect should only re-run if these props change.
-    // currentIndexRef is intentionally NOT in the dependency array because
-    // its updates should NOT trigger the effect to restart.
-  }, [text, typingSpeed, delay, onTypingComplete]);
+    return () => {
+      clearTimeout(timeoutId);
+      console.log(`TypingEffect: Cleanup for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
+    };
+  }, [text, currentIndex, typingSpeed, delay, onTypingComplete]);
 
   return <>{displayText}</>;
 };
