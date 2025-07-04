@@ -1,63 +1,115 @@
-// src/components/TypingEffect.tsx
+// src/components/commands/Whois.tsx
 import React, { useState, useEffect } from 'react';
+import TypingEffect from '../TypingEffect';
+import {
+    AboutWrapper,
+    HighlightAlt,
+    HighlightSpan,
+} from "../styles/About.styled";
 
-interface TypingEffectProps {
-  text: string;
-  typingSpeed?: number;
-  delay?: number;
-  onTypingComplete?: () => void;
-}
+const Whois: React.FC = () => {
+    const [showFirstParagraph, setShowFirstParagraph] = useState(false);
+    const [firstParagraphTyped, setFirstParagraphTyped] = useState(false);
 
-const TypingEffect: React.FC<TypingEffectProps> = ({
-  text,
-  typingSpeed = 1,
-  delay = 0,
-  onTypingComplete,
-}) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+    const [showSecondParagraph, setShowSecondParagraph = useState(false);
+    const [secondParagraphTyped, setSecondParagraphTyped] = useState(false);
 
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    const [showThirdParagraph, setShowThirdParagraph] = useState(false);
+    const [thirdParagraphTyped, setThirdParagraphTyped] = useState(false);
 
-    const startTyping = () => {
-      if (currentIndex < text.length) {
-        timeoutId = setTimeout(() => {
-          setDisplayText((prevText) => prevText + text[currentIndex]);
-          setCurrentIndex((prevIndex) => prevIndex + 1);
-        }, typingSpeed);
-      } else {
-        // Typing is complete
-        console.log(`TypingEffect: Finished typing for: "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-        if (onTypingComplete) {
-            console.log(`TypingEffect: Calling onTypingComplete for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-            onTypingComplete();
-        } else {
-            console.log(`TypingEffect: onTypingComplete prop is undefined for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-        }
-      }
-    };
+    useEffect(() => {
+        console.log("Whois: Component mounted. Setting showFirstParagraph to true."); // <--- LOG
+        setShowFirstParagraph(true);
+    }, []);
 
-    if (currentIndex < text.length) {
-      if (delay > 0 && currentIndex === 0) {
-        console.log(`TypingEffect: Starting with delay ${delay} for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-        timeoutId = setTimeout(startTyping, delay);
-      } else {
-        console.log(`TypingEffect: Starting immediately for "${text.substring(0, 30)}..." (Current index: ${currentIndex})`); // <--- ADD THIS LOG
-        startTyping();
-      }
-    } else {
-        console.log(`TypingEffect: Already completed for "${text.substring(0, 30)}..." (Current index: ${currentIndex}, text length: ${text.length})`); // <--- ADD THIS LOG
-    }
+    // Add useEffects to track state changes
+    useEffect(() => {
+        console.log("Whois State: firstParagraphTyped =", firstParagraphTyped, "showSecondParagraph =", showSecondParagraph); // <--- LOG
+    }, [firstParagraphTyped, showSecondParagraph]);
+
+    useEffect(() => {
+        console.log("Whois State: secondParagraphTyped =", secondParagraphTyped, "showThirdParagraph =", showThirdParagraph); // <--- LOG
+    }, [secondParagraphTyped, showThirdParagraph]);
+
+    useEffect(() => {
+        console.log("Whois State: thirdParagraphTyped =", thirdParagraphTyped); // <--- LOG
+    }, [thirdParagraphTyped]);
 
 
-    return () => {
-      clearTimeout(timeoutId);
-      console.log(`TypingEffect: Cleanup for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-    };
-  }, [text, currentIndex, typingSpeed, delay, onTypingComplete]);
+    return (
+        <AboutWrapper data-testid="whois">
+            {/* First Paragraph */}
+            <p>
+                {!firstParagraphTyped ? (
+                    showFirstParagraph && (
+                        <TypingEffect
+                            text="Hi, my name is KALPESH SOLANKI! You can also call me Xploitoverload."
+                            typingSpeed={1}
+                            onTypingComplete={() => {
+                                console.log("Whois Callback: First paragraph typing complete. Attempting to update state."); // <--- LOG
+                                setFirstParagraphTyped(true);
+                                setShowSecondParagraph(true);
+                                console.log("Whois Callback: State update calls made for first paragraph."); // <--- LOG
+                            }}
+                        />
+                    )
+                ) : (
+                    <>
+                        Hi, my name is <HighlightSpan>KALPESH SOLANKI</HighlightSpan>! You can
+                        also call me Xploitoverload.
+                    </>
+                )}
+            </p>
 
-  return <>{displayText}</>;
+            {/* Second Paragraph */}
+            <p>
+                {!secondParagraphTyped ? (
+                    showSecondParagraph && ( // This must be true for TypingEffect to render
+                        <TypingEffect
+                            text="I'm a security researcher and hacker."
+                            typingSpeed={1}
+                            delay={200}
+                            onTypingComplete={() => {
+                                console.log("Whois Callback: Second paragraph typing complete. Attempting to update state."); // <--- LOG
+                                setSecondParagraphTyped(true);
+                                setShowThirdParagraph(true);
+                                console.log("Whois Callback: State update calls made for second paragraph."); // <--- LOG
+                            }}
+                        />
+                    )
+                ) : (
+                    <>
+                        I'm <HighlightAlt>a security researcher</HighlightAlt> and{" "}
+                        <HighlightAlt>hacker</HighlightAlt>.
+                    </>
+                )}
+            </p>
+
+            {/* Third Paragraph */}
+            <p>
+                {!thirdParagraphTyped ? (
+                    showThirdParagraph && ( // This must be true for TypingEffect to render
+                        <TypingEffect
+                            text={"I love to build and hack stuff.\nTo see my projects please type \"projects\".\nTo learn more about me with a GUI portfolio, please type \"gui\"."}
+                            typingSpeed={1}
+                            delay={200}
+                            onTypingComplete={() => {
+                                console.log("Whois Callback: Third paragraph typing complete. Attempting to update state."); // <--- LOG
+                                setThirdParagraphTyped(true);
+                                console.log("Whois Callback: State update calls made for third paragraph."); // <--- LOG
+                            }}
+                        />
+                    )
+                ) : (
+                    <>
+                        I love to build and hack stuff. <br />
+                        To see my projects please type "projects". <br />
+                        To learn more about me with a GUI portfolio, please type "gui".
+                    </>
+                )}
+            </p>
+        </AboutWrapper>
+    );
 };
 
-export default TypingEffect;
+export default Whois;
