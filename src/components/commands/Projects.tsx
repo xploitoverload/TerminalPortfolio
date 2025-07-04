@@ -59,24 +59,24 @@ const projects = [
         desc: "",
         url: "",
     },
-    {
-        id: 2,
-        title: "",
-        desc: "",
-        url: "",
-    },
-    {
-        id: 3,
-        title: "",
-        desc: "",
-        url: "",
-    },
-    {
-        id: 4,
-        title: "",
-        desc: "",
-        url: "",
-    },
+    // {
+    //     id: 2,
+    //     title: "",
+    //     desc: "",
+    //     url: "",
+    // },
+    // {
+    //     id: 3,
+    //     title: "",
+    //     desc: "",
+    //     url: "",
+    // },
+    // {
+    //     id: 4,
+    //     title: "",
+    //     desc: "",
+    //     url: "",
+    // },
 ];
 // const projects = [
 //     {

@@ -1,4 +1,4 @@
-import About from "./commands/About";
+import Whois from "./commands/Whois";
 import Clear from "./commands/Clear";
 import Echo from "./commands/Echo";
 import Education from "./commands/Education";
@@ -11,6 +11,8 @@ import History from "./commands/History";
 import Projects from "./commands/Projects";
 import Socials from "./commands/Socials";
 import Themes from "./commands/Themes";
+import Secret from "./commands/Secret";
+import Sudo from "./commands/Sudo";
 import { OutputContainer, UsageDiv } from "./styles/Output.styled";
 import { termContext } from "./Terminal";
 import { useContext } from "react";
@@ -35,7 +37,8 @@ const Output: React.FC<Props> = ({ index, cmd }) => {
         <OutputContainer data-testid={index === 0 ? "latest-output" : null}>
             {
                 {
-                    about: <About />,
+                    whois: <Whois />,
+                    secret:<Secret/>,
                     clear: <Clear />,
                     echo: <Echo />,
                     education: <Education />,
@@ -48,7 +51,8 @@ const Output: React.FC<Props> = ({ index, cmd }) => {
                     socials: <Socials />,
                     themes: <Themes />,
                     welcome: <Welcome />,
-                    whoami: <GeneralOutput>anonymous</GeneralOutput>,
+                    whoami: <GeneralOutput>anonymous.visitor</GeneralOutput>,
+                    sudo:<Sudo/>,
                     flag: <Flag />,
                 }[cmd]
             }
