@@ -1,22 +1,29 @@
+// src/hooks/useTheme.ts
 import { useEffect, useState } from "react";
-import themes from "../components/styles/themes";
-import { setToLS, getFromLS } from "../utils/storage";
 import { DefaultTheme } from "styled-components";
+import { defaultTheme } from "../components/styles/themes";
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState<DefaultTheme>(themes.dark);
+  const [theme, setTheme] = useState<DefaultTheme>(defaultTheme);
   const [themeLoaded, setThemeLoaded] = useState(false);
 
-  const setMode = (mode: DefaultTheme) => {
-    setToLS("tsn-theme", mode.name);
-    setTheme(mode);
-  };
-
   useEffect(() => {
-    const localThemeName = getFromLS("tsn-theme");
-    localThemeName ? setTheme(themes[localThemeName]) : setTheme(themes.dark);
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+      try {
+        setTheme(JSON.parse(savedTheme));
+      } catch (e) {
+        setTheme(defaultTheme);
+      }
+    }
     setThemeLoaded(true);
   }, []);
+
+  const setMode = (mode: DefaultTheme) => {
+    localStorage.setItem('theme', JSON.stringify(mode));
+    setTheme(mode);
+  };
 
   return { theme, themeLoaded, setMode };
 };
