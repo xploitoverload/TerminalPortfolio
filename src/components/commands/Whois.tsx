@@ -10,7 +10,7 @@ const Whois: React.FC = () => {
   return (
     <AboutWrapper data-testid="Whois">
       <Sequence speed={25} gap={350}>
-        <div style={{ marginBottom: "4px" }}>
+        <div style={{ marginBottom: "3px" }}>
           <Type>Hi, my name is </Type>
           <HighlightSpan>KALPESH SOLANKI</HighlightSpan>
           <Type>! You can also call me Xploitoverload.</Type>
@@ -24,12 +24,14 @@ const Whois: React.FC = () => {
           <Type>.</Type>
         </div>
 
-        <div style={{ marginBottom: "4px" }}>
+        <div style={{ marginBottom: "3px" }}>
           <Type>I love to build and hack stuff.</Type>
+          <br></br>
         </div>
 
-        <div style={{ marginBottom: "4px" }}>
+        <div style={{ marginBottom: "3px" }}>
           <Type>To see my projects please type "projects".</Type>
+          <br></br>
         </div>
 
         <div style={{ marginBottom: "4px" }}>
