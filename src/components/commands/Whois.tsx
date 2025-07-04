@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TypingEffect from './TypingEffect'; // <--- IMPORTANT: Adjust this path based on your file structure
+import TypingEffect from '../TypingEffect'; // <--- IMPORTANT: Adjust this path based on your file structure
                                          // If TypingEffect.tsx is in the same folder as Whois.tsx, use './TypingEffect'
                                          // If TypingEffect.tsx is one level up, use '../TypingEffect'
 import {
