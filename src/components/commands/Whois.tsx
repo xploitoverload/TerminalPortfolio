@@ -8,27 +8,33 @@ import {
 } from "../styles/About.styled";
 
 const Whois: React.FC = () => {
-    const [visibleParagraphs, setVisibleParagraphs] = useState([false, false, false]);
-    const [completedParagraphs, setCompletedParagraphs] = useState([false, false, false]);
+    const [paragraphStates, setParagraphStates] = useState([
+        { visible: false, completed: false },
+        { visible: false, completed: false },
+        { visible: false, completed: false }
+    ]);
 
     useEffect(() => {
-        setVisibleParagraphs([true, false, false]);
+        // Activate first paragraph on mount
+        setParagraphStates(prev => [
+            { ...prev[0], visible: true },
+            prev[1],
+            prev[2]
+        ]);
     }, []);
 
     const handleTypingComplete = (index: number) => {
-        setCompletedParagraphs(prev => {
+        setParagraphStates(prev => {
             const updated = [...prev];
-            updated[index] = true;
+            updated[index] = { ...updated[index], completed: true };
+            
+            // Activate next paragraph if exists
+            if (index < updated.length - 1) {
+                updated[index + 1] = { ...updated[index + 1], visible: true };
+            }
+            
             return updated;
         });
-
-        if (index < 2) {
-            setVisibleParagraphs(prev => {
-                const updated = [...prev];
-                updated[index + 1] = true;
-                return updated;
-            });
-        }
     };
 
     const paragraphConfigs = [
@@ -62,18 +68,16 @@ const Whois: React.FC = () => {
         <AboutWrapper data-testid="whois">
             {paragraphConfigs.map((config, index) => (
                 <p key={index}>
-                    {!completedParagraphs[index] ? (
-                        visibleParagraphs[index] && (
-                            <TypingEffect
-                                text={config.text}
-                                typingSpeed={config.speed}
-                                delay={config.delay}
-                                onTypingComplete={() => handleTypingComplete(index)}
-                            />
-                        )
-                    ) : (
+                    {paragraphStates[index].visible && !paragraphStates[index].completed ? (
+                        <TypingEffect
+                            text={config.text}
+                            typingSpeed={config.speed}
+                            delay={config.delay}
+                            onTypingComplete={() => handleTypingComplete(index)}
+                        />
+                    ) : paragraphStates[index].completed ? (
                         config.formatted
-                    )}
+                    ) : null}
                 </p>
             ))}
         </AboutWrapper>
