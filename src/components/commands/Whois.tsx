@@ -29,12 +29,12 @@ const Whois: React.FC = () => {
 
                 {/* line 3 */}
                 <p>
-                    <Type>I love to build and hack stuff.</Type>
+                    <Type>I love to build and hack stuff.<br></br></Type>
 
 
                     {/* line 4 */}
 
-                    <Type>To see my projects please type "projects".</Type>
+                    <Type>To see my projects please type "projects".<br></br></Type>
 
 
                     {/* line 5 */}
