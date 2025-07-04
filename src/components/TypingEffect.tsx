@@ -5,20 +5,17 @@ interface TypingEffectProps {
   text: string;
   typingSpeed?: number; // Milliseconds per character
   delay?: number; // Initial delay before typing starts
-  loop?: boolean; // Whether the typing effect should loop (likely false for this use case)
   onTypingComplete?: () => void; // Callback when typing is done
 }
 
 const TypingEffect: React.FC<TypingEffectProps> = ({
   text,
-  typingSpeed = 50, // Slightly faster default for paragraphs
+  typingSpeed = 1, // Default to 1ms for maximum speed
   delay = 0,
-  loop = false,
   onTypingComplete,
 }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -30,14 +27,15 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
           setCurrentIndex((prevIndex) => prevIndex + 1);
         }, typingSpeed);
       } else {
-        setIsTypingComplete(true);
+        // Typing is complete
         if (onTypingComplete) {
-          onTypingComplete(); // Call the callback when done
+          onTypingComplete();
         }
       }
     };
 
-    if (!isTypingComplete) {
+    // Only start if text hasn't been fully displayed yet
+    if (currentIndex < text.length) {
       if (delay > 0 && currentIndex === 0) {
         timeoutId = setTimeout(startTyping, delay);
       } else {
@@ -48,9 +46,9 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [text, currentIndex, typingSpeed, delay, isTypingComplete, onTypingComplete]);
+  }, [text, currentIndex, typingSpeed, delay, onTypingComplete]);
 
-  return <span className="typing-effect">{displayText}</span>;
+  return <>{displayText}</>; // Using a Fragment to avoid extra spans
 };
 
 export default TypingEffect;
