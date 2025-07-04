@@ -23,7 +23,7 @@ const Whois: React.FC = () => {
                 {showFirstParagraph && (
                     <TypingEffect
                         text="Hi, my name is KALPESH SOLANKI! You can also call me Xploitoverload."
-                        typingSpeed={40} // Adjust speed as desired
+                        typingSpeed={120} // Adjust speed as desired
                         onTypingComplete={() => setShowSecondParagraph(true)}
                     />
                 )}
@@ -32,8 +32,8 @@ const Whois: React.FC = () => {
                 {showSecondParagraph && (
                     <TypingEffect
                         text="I'm a security researcher and hacker."
-                        typingSpeed={40}
-                        delay={500} // Short delay after first paragraph finishes
+                        typingSpeed={120}
+                        delay={50} // Short delay after first paragraph finishes
                         onTypingComplete={() => setShowThirdParagraph(true)}
                     />
                 )}
@@ -42,8 +42,8 @@ const Whois: React.FC = () => {
                 {showThirdParagraph && (
                     <TypingEffect
                         text="I love to build and hack stuff. To see my projects please type projects. To learn more about me with a GUI portfolio, please type gui."
-                        typingSpeed={40}
-                        delay={500} // Short delay after second paragraph finishes
+                        typingSpeed={120}
+                        delay={50} // Short delay after second paragraph finishes
                     />
                 )}
             </p>
