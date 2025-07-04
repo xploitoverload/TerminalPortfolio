@@ -17,6 +17,7 @@ import { OutputContainer, UsageDiv } from "./styles/Output.styled";
 import { termContext } from "./Terminal";
 import { useContext } from "react";
 import Flag from "./commands/Flag";
+import AutoType from "../AutoType";
 
 type Props = {
     index: number;
@@ -37,8 +38,8 @@ const Output: React.FC<Props> = ({ index, cmd }) => {
         <OutputContainer data-testid={index === 0 ? "latest-output" : null}>
             {
                 {
-                    whois: <Whois />,
-                    secret:<Secret/>,
+                    whois: <AutoType><Whois /></AutoType>,
+                    secret:<Secret />,
                     clear: <Clear />,
                     echo: <Echo />,
                     education: <Education />,
