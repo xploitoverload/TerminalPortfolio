@@ -1,27 +1,41 @@
 import React, { useEffect, useState } from "react";
 
-interface Props {
-  children: React.ReactNode;   // ✅ किसी भी तरह का text node array
-  speed?: number;
+export interface TypeProps {
+  children: React.ReactNode;
+  speed?: number;    // ms/char
+  delay?: number;    // ms before start
   cursor?: boolean;
+  onDone?: () => void;
 }
 
-const Type: React.FC<Props> = ({ children, speed = 25, cursor = false }) => {
-  // flatten children to one string
-  const fullText = React.Children.toArray(children).join("");
-
-  const [shown, setShown] = useState("");
+const Type: React.FC<TypeProps> = ({
+  children,
+  speed = 25,
+  delay = 0,
+  cursor = false,
+  onDone,
+}) => {
+  const text = React.Children.toArray(children).join("");
+  const [shown, setShown] = useState(delay === 0 ? "" : undefined);
 
   useEffect(() => {
-    let i = 0;
-    const id = setInterval(() => {
-      i++;
-      setShown(fullText.slice(0, i));
-      if (i >= fullText.length) clearInterval(id);
-    }, speed);
-    return () => clearInterval(id);
-  }, [fullText, speed]);
+    const start = setTimeout(() => {
+      let i = 0;
+      setShown("");
+      const id = setInterval(() => {
+        i++;
+        setShown(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(id);
+          onDone?.();
+        }
+      }, speed);
+    }, delay);
 
+    return () => clearTimeout(start);
+  }, [text, speed, delay, onDone]);
+
+  if (shown === undefined) return null; // still waiting
   return (
     <>
       {shown}
