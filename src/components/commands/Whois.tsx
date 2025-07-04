@@ -1,6 +1,6 @@
-// src/components/About.tsx
+// src/components/About.tsx (or wherever you placed it)
 import React, { useState, useEffect } from 'react';
-import TypingEffect from '../TypingEffect'; // Adjust path as needed
+import TypingEffect from './TypingEffect'; // !! Verify this path is correct !!
 import {
     AboutWrapper,
     HighlightAlt,
@@ -20,8 +20,15 @@ const Whois: React.FC = () => {
 
     // Effect to kick off the first paragraph's typing when the component mounts
     useEffect(() => {
+        console.log("About component mounted, setting showFirstParagraph to true."); // DEBUG
         setShowFirstParagraph(true);
     }, []); // Runs only once on component mount
+
+
+    // You might add useEffects here to log state changes if needed, e.g.:
+    // useEffect(() => { console.log('firstParagraphTyped:', firstParagraphTyped); }, [firstParagraphTyped]);
+    // useEffect(() => { console.log('showSecondParagraph:', showSecondParagraph); }, [showSecondParagraph]);
+    // ... and so on for other states.
 
     return (
         <AboutWrapper data-testid="whois">
@@ -30,9 +37,10 @@ const Whois: React.FC = () => {
                 {!firstParagraphTyped ? ( // If not yet typed, show the typing effect
                     showFirstParagraph && (
                         <TypingEffect
-                            text="Hi, my name is KALPESH SOLANKI!. You can also call me Xploitoverload."
+                            text="Hi, my name is KALPESH SOLANKI! You can also call me Xploitoverload."
                             typingSpeed={1} // Maximum speed
                             onTypingComplete={() => {
+                                console.log("First paragraph typing complete. Setting firstParagraphTyped to true and showSecondParagraph to true."); // DEBUG
                                 setFirstParagraphTyped(true); // Mark as typed
                                 setShowSecondParagraph(true); // Trigger next paragraph
                             }}
@@ -55,6 +63,7 @@ const Whois: React.FC = () => {
                             typingSpeed={1} // Maximum speed
                             delay={200} // Short pause before starting
                             onTypingComplete={() => {
+                                console.log("Second paragraph typing complete. Setting secondParagraphTyped to true and showThirdParagraph to true."); // DEBUG
                                 setSecondParagraphTyped(true); // Mark as typed
                                 setShowThirdParagraph(true); // Trigger next paragraph
                             }}
@@ -73,12 +82,14 @@ const Whois: React.FC = () => {
                 {!thirdParagraphTyped ? ( // If not yet typed, show the typing effect
                     showThirdParagraph && (
                         <TypingEffect
-                            // Text for typing effect (note the actual \n for display purposes)
-                            // The TypingEffect will print these \n characters as actual characters
+                            // Text for typing effect (plain string, \n will be literal characters)
                             text={"I love to build and hack stuff.\nTo see my projects please type \"projects\".\nTo learn more about me with a GUI portfolio, please type \"gui\"."}
                             typingSpeed={1} // Maximum speed
                             delay={200} // Short pause before starting
-                            onTypingComplete={() => setThirdParagraphTyped(true)} // Mark as typed
+                            onTypingComplete={() => {
+                                console.log("Third paragraph typing complete. Setting thirdParagraphTyped to true."); // DEBUG
+                                setThirdParagraphTyped(true); // Mark as typed
+                            }}
                         />
                     )
                 ) : ( // Once typed, display the fully formatted JSX with <br />
