@@ -1,5 +1,5 @@
 // src/components/TypingEffect.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface TypingEffectProps {
   text: string;
@@ -10,54 +10,51 @@ interface TypingEffectProps {
 
 const TypingEffect: React.FC<TypingEffectProps> = ({
   text,
-  typingSpeed = 1,
+  typingSpeed = 30,
   delay = 0,
-  onTypingComplete,
+  onTypingComplete
 }) => {
-  const [displayText, setDisplayText] = useState('');
+  const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const isMountedRef = useRef(true);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    const startTyping = () => {
-      if (currentIndex < text.length) {
-        timeoutId = setTimeout(() => {
-          setDisplayText((prevText) => prevText + text[currentIndex]);
-          setCurrentIndex((prevIndex) => prevIndex + 1);
-        }, typingSpeed);
-      } else {
-        // Typing is complete
-        console.log(`TypingEffect: Finished typing for: "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-        if (onTypingComplete) {
-            console.log(`TypingEffect: Calling onTypingComplete for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-            onTypingComplete();
-        } else {
-            console.log(`TypingEffect: onTypingComplete prop is undefined for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-        }
+    isMountedRef.current = true;
+    
+    return () => {
+      isMountedRef.current = false;
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
       }
     };
+  }, []);
 
-    if (currentIndex < text.length) {
-      if (delay > 0 && currentIndex === 0) {
-        console.log(`TypingEffect: Starting with delay ${delay} for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
-        timeoutId = setTimeout(startTyping, delay);
-      } else {
-        console.log(`TypingEffect: Starting immediately for "${text.substring(0, 30)}..." (Current index: ${currentIndex})`); // <--- ADD THIS LOG
-        startTyping();
+  useEffect(() => {
+    if (currentIndex >= text.length) {
+      if (onTypingComplete) {
+        onTypingComplete();
       }
-    } else {
-        console.log(`TypingEffect: Already completed for "${text.substring(0, 30)}..." (Current index: ${currentIndex}, text length: ${text.length})`); // <--- ADD THIS LOG
+      return;
     }
 
+    const timeout = setTimeout(() => {
+      if (isMountedRef.current) {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }
+    }, currentIndex === 0 ? delay : typingSpeed);
+
+    timerRef.current = timeout;
 
     return () => {
-      clearTimeout(timeoutId);
-      console.log(`TypingEffect: Cleanup for "${text.substring(0, 30)}..."`); // <--- ADD THIS LOG
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, [text, currentIndex, typingSpeed, delay, onTypingComplete]);
 
-  return <>{displayText}</>;
+  return <>{displayedText}</>;
 };
 
 export default TypingEffect;
