@@ -4,9 +4,9 @@ import {
     HighlightSpan,
 } from "../styles/About.styled";
 
-const About: React.FC = () => {
+const Whois: React.FC = () => {
     return (
-        <AboutWrapper data-testid="about">
+        <AboutWrapper data-testid="Whois">
             <p>
                 Hi, my name is <HighlightSpan>KALPESH SOLANKI</HighlightSpan>! You can
                 also call me Xploitoverload.
@@ -24,4 +24,4 @@ const About: React.FC = () => {
     );
 };
 
-export default About;
+export default Whois;

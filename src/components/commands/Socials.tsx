@@ -52,7 +52,7 @@ const socials = [
     {
         id: 1,
         title: "GitHub",
-        url: "https://github.com/S1l3ntC0nquer/",
+        url: "https://github.com/xploitoverload",
         tab: 3,
     },
     {
