@@ -1,6 +1,6 @@
 # Terminal Portfolio Website by Sat Naing
 
-![Terminal Portfolio Website by Sat Naing](https://user-images.githubusercontent.com/53733092/194220661-e2ff8b4c-f64a-4b64-a836-c52fae6bbcda.png)
+![Terminal Portfolio Website by Sat Naing](/public/xploitoverload-og.png)
 
 ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue?style=flat-square)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/81fdb91d-c06f-46c2-b18d-dfc6f090f281/deploy-status)](https://app.netlify.com/sites/terminal-sn/deploys)
