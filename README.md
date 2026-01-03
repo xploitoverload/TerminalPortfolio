@@ -57,7 +57,7 @@ Currently, this website supports 6 themes. Type `themes` in the terminal for mor
 ## Lighthouse Score
 
 <p align="center">
-<img width="710" alt="Sat Naing Terminal Lighthouse Score" src="public/lighthouse-result.svg">
+<img width="710" alt="Xploitoverload Terminal Lighthouse Score" src="public/lighthouse-result.svg">
 </p>
 
 ## Running Locally
@@ -96,10 +96,10 @@ npm run dev
 
 Here are some inspiration for this kind of terminal website. Only some features and functionalities are inspired by these following websites. All codes are written on my own.
 
-- I built this repository using [Jinno](https://www.jinno.app/redirect?from=satnaing&redirect=vs)
+- I built this repository using [Jinno](https://www.jinno.app/redirect?from=&redirect=vs)
 - [term m4tt72](https://term.m4tt72.com/)
 - [Forrest](https://fkcodes.com/)
 
 ## Author
 
-- [@satnaing](https://satnaing.dev)
+- [@xploitoverload](https://kalpeshsolanki.me)
