@@ -55,22 +55,22 @@ const Projects: React.FC = () => {
 const projects = [
     {
         id: 1,
-        title: "",
-        desc: "",
-        url: "",
+        title: "UART-Tools",
+        desc: "SERIAL EXPLOITATION FRAMEWORK v1.0",
+        url: "https://github.com/xploitoverload/UART-Tools",
     },
-    // {
-    //     id: 2,
-    //     title: "",
-    //     desc: "",
-    //     url: "",
-    // },
+    {
+        id: 2,
+        title: "ProjectFlow",
+        desc: "Project Management System with Facial ID Authentication",
+        url: "https://github.com/xploitoverload/ProjectFlow",
+    },
     // {
     //     id: 3,
     //     title: "",
     //     desc: "",
     //     url: "",
-    // },
+    
     // {
     //     id: 4,
     //     title: "",
@@ -78,31 +78,6 @@ const projects = [
     //     url: "",
     // },
 ];
-// const projects = [
-//     {
-//         id: 1,
-//         title: "Black-Hat-Zig",
-//         desc: "Zig for malware development & red-teaming.",
-//         url: "https://github.com/cx330blake/black-hat-zig",
-//     },
-//     {
-//         id: 2,
-//         title: "ZYRA",
-//         desc: "ZYRA: Your Runtime Armor. An executable packer built in Zig programming language.",
-//         url: "https://github.com/cx330blake/zyra",
-//     },
-//     {
-//         id: 3,
-//         title: "Spell-Whisperer",
-//         desc: "A prompt injection challenge, from easy to hard.",
-//         url: "https://spell-whisperer.cx330.tw",
-//     },
-//     {
-//         id: 4,
-//         title: "ZYPE",
-//         desc: "ZYPE: Your Payload Encryptor. A shellcode encryptor & obfuscator for Zig.",
-//         url: "https://github.com/cx330blake/zype",
-//     },
 // ];
 
 export default Projects;
