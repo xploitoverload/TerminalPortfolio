@@ -2,7 +2,7 @@ name: Deploy Vite site to GitHub Pages
 
 on:
   push:
-    branches: [main]       # main पर हर push → deploy
+    branches: [main]       
 
 permissions:
   contents: read
@@ -21,11 +21,11 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
-      - run: npm run build         # dist/ बनता है
-      - run: cp CNAME dist/        # ⬅️ CNAME भी साथ कॉपी
+      - run: npm run build         
+      - run: cp CNAME dist/     
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist             # dist ➜ artifact
+          path: ./dist             
 
   deploy:
     needs: build
